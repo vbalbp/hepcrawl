@@ -84,7 +84,7 @@ class APSSpider(LastRunStoreSpider):
         """Just yield the url."""
         started_at = datetime.utcnow()
         yield Request(self.url)
-        self.save_run(started_at=started_at, set_=self.set)
+        self.save_run(started_at=started_at, set_='openaccess')
 
     def parse(self, response):
         """Parse a APS record into a HEP record.
