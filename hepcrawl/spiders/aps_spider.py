@@ -54,8 +54,8 @@ class APSSpider(LastRunStoreSpider):
     aps_base_url = "http://harvest.aps.org/v2/journals/articles"
 
     @strict_kwargs
-    def __init__(self, from_date=None, until_date=None,
-                 date="published", sets=None, per_page=100,
+    def __init__(self, url=None, from_date=None, until_date=None,
+                 date="published", journals=None, sets=None, per_page=100,
                  **kwargs):
         """Construct APS spider."""
         super(APSSpider, self).__init__(**kwargs)
