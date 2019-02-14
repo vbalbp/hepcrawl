@@ -60,21 +60,29 @@ class APSSpider(LastRunStoreSpider):
         """Construct APS spider."""
         super(APSSpider, self).__init__(**kwargs)
         # We Construct.
+        self.from_date = from_date
+        self.until_date = until_date
+        self.date = date
+        self.per_page = per_page
+        self.sets = sets
+
+
+    @property
+    def url(self):
         params = {}
-        if from_date:
-            params['from'] = from_date or self.resume_from(set_=sets)
-        if until_date:
-            params['until'] = until_date
-        if date:
-            params['date'] = date
-        if per_page:
-            params['per_page'] = per_page
-        if sets:
-            params['set'] = sets
+        if self.from_date:
+            params['from'] = self.from_date or self.resume_from(set_=self.sets)
+        if self.until_date:
+            params['until'] = self.until_date
+        if self.date:
+            params['date'] = self.date
+        if self.per_page:
+            params['per_page'] = self.per_page
+        if self.sets:
+            params['set'] = self.sets
 
         # Put it together: furl is awesome
-        url = furl(APSSpider.aps_base_url).add(params).url
-        self.url = url
+        return furl(APSSpider.aps_base_url).add(params).url
 
 
     def start_requests(self):
