@@ -68,8 +68,6 @@ class APSSpider(LastRunStoreSpider):
                 params['until'] = until_date
             if date:
                 params['date'] = date
-            if journals:
-                params['journals'] = journals
             if per_page:
                 params['per_page'] = per_page
             if sets:
