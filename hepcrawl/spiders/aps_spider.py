@@ -55,7 +55,7 @@ class APSSpider(LastRunStoreSpider):
 
     @strict_kwargs
     def __init__(self, url=None, from_date=None, until_date=None,
-                 date="published", journals=None, sets=None, per_page=100,
+                 date="published", sets=None, per_page=100,
                  **kwargs):
         """Construct APS spider."""
         super(APSSpider, self).__init__(**kwargs)
