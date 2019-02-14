@@ -54,27 +54,26 @@ class APSSpider(LastRunStoreSpider):
     aps_base_url = "http://harvest.aps.org/v2/journals/articles"
 
     @strict_kwargs
-    def __init__(self, url=None, from_date=None, until_date=None,
+    def __init__(self, from_date=None, until_date=None,
                  date="published", sets=None, per_page=100,
                  **kwargs):
         """Construct APS spider."""
         super(APSSpider, self).__init__(**kwargs)
-        if url is None:
-            # We Construct.
-            params = {}
-            if from_date:
-                params['from'] = from_date
-            if until_date:
-                params['until'] = until_date
-            if date:
-                params['date'] = date
-            if per_page:
-                params['per_page'] = per_page
-            if sets:
-                params['set'] = sets
+        # We Construct.
+        params = {}
+        if from_date:
+            params['from'] = from_date or self.resume_from(set_=sets)
+        if until_date:
+            params['until'] = until_date
+        if date:
+            params['date'] = date
+        if per_page:
+            params['per_page'] = per_page
+        if sets:
+            params['set'] = sets
 
-            # Put it together: furl is awesome
-            url = furl(APSSpider.aps_base_url).add(params).url
+        # Put it together: furl is awesome
+        url = furl(APSSpider.aps_base_url).add(params).url
         self.url = url
 
 
