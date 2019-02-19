@@ -70,8 +70,9 @@ class APSSpider(LastRunStoreSpider):
     @property
     def url(self):
         params = {}
-        if self.from_date:
-            params['from'] = self.from_date or self.resume_from(set_=self.sets)
+        from_date = self.from_date or self.resume_from(set_=self.set)
+        if from_date:
+            params['from'] = from_date
         if self.until_date:
             params['until'] = self.until_date
         if self.date:
